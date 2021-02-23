@@ -1,0 +1,35 @@
+spring:
+  cloud:
+    stream:
+      binders:
+        local_rabbit:
+          type: kafka
+          environment:
+            spring:
+              kafka:
+                admin:
+                  fail-fast: true
+                producer:
+                  bootstrap-servers: 192.168.8.191:32659
+                consumer:
+                  bootstrap-servers: 192.168.8.191:32659
+                bootstrap-servers: 192.168.8.191:32659
+      bindings:
+        input:
+          destination: HBASE_TEST_EXCHANGE
+          binder: local_rabbit
+          group: test_queue
+        output:
+          destination: HBASE_TEST_EXCHANGE
+          binder: local_rabbit
+          group: test_queue
+        input1:
+          destination: HBASE_TEST_EXCHANGE
+          binder: local_rabbit
+          group: test_queue1
+        output1:
+          destination: HBASE_TEST_EXCHANGE
+          binder: local_rabbit
+          group: test_queue1
+  main:
+    web-application-type: servlet
